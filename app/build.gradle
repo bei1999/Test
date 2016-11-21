@@ -1,5 +1,30 @@
 apply plugin: 'com.android.application'
 
+def getTime() {
+    if (!System.getenv('CI_BUILD')) {
+        return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC"))
+    }
+    return CI_BUILD_TIME
+
+}
+
+def gitVersionCode() {
+    def cmd = 'git rev-list HEAD --first-parent --count'
+    cmd.execute().text.trim().toInteger()
+}
+
+def gitVersionTag() {
+    if (!System.getenv('CI_BUILD')) {
+        def cmd01 = 'git rev-list --tags --max-count=1'
+        def desc = cmd01.execute().text.trim()
+        def cmd = 'git describe --tags '+desc
+        def version = cmd.execute().text.trim()
+        return version
+    }
+    return APP_VERSION_NAME
+
+}
+
 android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
@@ -75,10 +100,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors{
+        xiaomi{}
+        wandoujia{}
+    }
+
+    applicationVariants.all { variant ->
+        variant.mergedFlavor.versionCode = gitVersionCode()
+        variant.mergedFlavor.versionName = gitVersionTag()
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent + "/${variant.buildType.name}",
+                    "hellowTest-${variant.productFlavors[0].name}-${variant.versionName}-${variant.buildType.name}-${getTime()}.apk".toLowerCase())
+        }
+    }
 }
+
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }
