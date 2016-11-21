@@ -1,19 +1,104 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+
+
+def getTime() {
+    if (!System.getenv('CI_BUILD')) {
+        return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC"))
+    }
+    return CI_BUILD_TIME
+
+}
+
+def gitVersionCode() {
+    def cmd = 'git rev-list HEAD --first-parent --count'
+    cmd.execute().text.trim().toInteger()
+}
+
+def gitVersionTag() {
+    if (!System.getenv('CI_BUILD')) {
+        def cmd01 = 'git rev-list --tags --max-count=1'
+        def desc = cmd01.execute().text.trim()
+        def cmd = 'git describe --tags '+desc
+        def version = cmd.execute().text.trim()
+        return version
+    }
+    return APP_VERSION_NAME
+
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
+
+    signingConfigs {
+        debugConfig {
+            storeFile file("buildkey/debug.keystore")
+            storePassword "android"
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+
+        stageConfig {
+            storeFile file("buildkey/bei1999.jks")
+            storePassword "123456"
+            keyAlias "bei1999"
+            keyPassword "123456"
+        }
+
+
+        releaseConfig {
+            storeFile file("buildkey/bei1999.jks")
+            storePassword "123456"
+            keyAlias "bei1999"
+            keyPassword "123456"
+        }
+
+
+    }
 
     defaultConfig {
         applicationId "com.bei.test"
         minSdkVersion 8
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName APP_VERSION_Name
+        buildConfigField('String','API_SERVICE_URL',RELEASE_API_SERVICE_URL)
+        buildConfigField('String','API_SERVICE_PORT',RELEASE_API_SERVICE_PORT)
+        manifestPlaceholders = [
+               UMENG_APPKEY_VALUE       :  "qqddfsdfsfsjfsfhsfhsjf"
+        ]
     }
     buildTypes {
+        debug {
+            buildConfigField('String', 'API_SERVICE_URL', DEBUG_API_SERVICE_URL)
+            buildConfigField('String', 'API_SERVICE_PORT', DEBUG_API_SERVICE_PORT)
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE       :  "wewesdssfsdfsdfs"
+            ]
+            signingConfig signingConfigs.debugConfig
+        }
+
+        stage {
+            buildConfigField('String', 'API_SERVICE_URL', STAGE_API_SERVICE_URL)
+            buildConfigField('String', 'API_SERVICE_PORT', STAGE_API_SERVICE_PORT)
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE       :  "kkadfhhasdhashdjahf"
+            ]
+            zipAlignEnabled true
+            minifyEnabled true
+            signingConfig signingConfigs.stageConfig
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
-            minifyEnabled false
+            buildConfigField('String', 'API_SERVICE_URL', RELEASE_API_SERVICE_URL)
+            buildConfigField('String', 'API_SERVICE_PORT', RELEASE_API_SERVICE_PORT)
+            manifestPlaceholders = [
+                    UMENG_APPKEY_VALUE       :  "qqddfsdfsfsjfsfhsfhsjf"
+            ]
+            zipAlignEnabled true
+            minifyEnabled true
+            signingConfig signingConfigs.releaseConfig
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -21,7 +106,24 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    productFlavors{
+        xiaomi{}
+        wandoujia{}
+    }
+
+    applicationVariants.all { variant ->
+        variant.mergedFlavor.versionCode = gitVersionCode()
+        variant.mergedFlavor.versionName = gitVersionTag()
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent + "/${variant.buildType.name}",
+                    "hellowTest-${variant.productFlavors[0].name}-${variant.versionName}-${variant.buildType.name}-${getTime()}.apk".toLowerCase())
+        }
+    }
 }
+
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

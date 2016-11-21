@@ -10,6 +10,12 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import android.util.Log;
+
+import com.bei.test.utils.Url;
+
+import static com.bei.test.BuildConfig.API_SERVICE_URL;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,5 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this,PermissionTestActivity.class));
                 break;
         }
+
+        String url = Url.getHost();
+        Log.d("bei",url);
+
     }
 }
