@@ -11,8 +11,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import android.util.Log;
+import android.view.View;
 
 import com.bei.test.utils.Url;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.bei.test.BuildConfig.API_SERVICE_URL;
 
@@ -34,13 +38,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.button, R.id.go_permission_bt})
+    @OnClick({R.id.button})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button:
-                break;
-            case R.id.go_permission_bt:
-                startActivity(new Intent(this,PermissionTestActivity.class));
                 break;
         }
 
