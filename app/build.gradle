@@ -118,7 +118,7 @@ android {
         variant.outputs.each { output ->
             output.outputFile = new File(
                     output.outputFile.parent + "/${variant.buildType.name}",
-                    "hellowTest-${variant.productFlavors[0].name}-${variant.versionName}-${variant.buildType.name}-${getTime()}.apk".toLowerCase())
+                    "hellowTest-${variant.productFlavors[0].name}-${variant.versionName}-${variant.buildType.name}.apk".toLowerCase())
         }
     }
 }
