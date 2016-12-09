@@ -59,7 +59,7 @@ android {
 
     defaultConfig {
         applicationId "com.bei.test"
-        minSdkVersion 8
+        minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName APP_VERSION_Name
@@ -132,4 +132,7 @@ dependencies {
     compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
     apt 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile 'com.orhanobut:logger:1.15'
 }

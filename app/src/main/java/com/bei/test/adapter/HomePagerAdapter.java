@@ -12,9 +12,6 @@ import com.bei.test.bean.NewsCategoryBean;
 import com.bei.test.fragment.NewsListFragment;
 
 
-/**
- * Created by wsl on 15-7-29.
- */
 public class HomePagerAdapter extends FragmentStatePagerAdapter {
 
     private List<NewsCategoryBean> categoryBeans;
