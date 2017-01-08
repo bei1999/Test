@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.bei.test.view.NewsInfoScrollView
+    <com.bei.test.view.NewsinfoScrollView
         android:id="@+id/newsInfoScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -30,6 +30,6 @@
         </LinearLayout>
 
 
-    </com.bei.test.view.NewsInfoScrollView>
+    </com.bei.test.view.NewsinfoScrollView>
 
 </LinearLayout>

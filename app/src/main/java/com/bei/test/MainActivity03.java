@@ -7,12 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.bei.test.view.NewsInfoScrollView;
 import com.bei.test.view.ObservableScrollView;
 
 import butterknife.Bind;

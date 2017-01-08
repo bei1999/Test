@@ -9,21 +9,21 @@ import android.widget.ScrollView;
  * Created by lzb on 16/11/8.
  */
 
-public class NewsInfoScrollView extends ScrollView {
+public class NewsinfoScrollView extends ScrollView {
     private OnScrollListener onScrollListener;
     private float lastX = 0;
     private float lastY = 0;
     private boolean isUp = false;
 
-    public NewsInfoScrollView(Context context) {
+    public NewsinfoScrollView(Context context) {
         super(context, null);
     }
 
-    public NewsInfoScrollView(Context context, AttributeSet attrs) {
+    public NewsinfoScrollView(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
     }
 
-    public NewsInfoScrollView(Context context, AttributeSet attrs, int defStyle) {
+    public NewsinfoScrollView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

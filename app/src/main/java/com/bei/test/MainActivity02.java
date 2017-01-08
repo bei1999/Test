@@ -12,8 +12,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 
-import com.bei.test.view.NewsInfoScrollView;
-import com.bei.test.view.ObservableScrollView;
+import com.bei.test.view.NewsinfoScrollView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,7 +22,7 @@ public class MainActivity02 extends AppCompatActivity {
     @Bind(R.id.img01)
     ImageView img01;
     @Bind(R.id.newsInfoScrollView)
-    NewsInfoScrollView newsInfoScrollView;
+    NewsinfoScrollView newsInfoScrollView;
     private int lastY = 0;
     private boolean isUp = false;
     private boolean isDown = false;
@@ -38,7 +37,7 @@ public class MainActivity02 extends AppCompatActivity {
     }
 
     private void initViews() {
-        newsInfoScrollView.setOnScrollListener(new NewsInfoScrollView.OnScrollListener() {
+        newsInfoScrollView.setOnScrollListener(new NewsinfoScrollView.OnScrollListener() {
             @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
             @Override
             public void onScrollOrientation(boolean isUp) {
