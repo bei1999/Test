@@ -3,6 +3,7 @@
 /.idea/libraries
 /.idea/misc.xml
 /.idea/gradle.xml
+.idea/modules.xml
 ／.idea/
 .DS_Store
 /build
