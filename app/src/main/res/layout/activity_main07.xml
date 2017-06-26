@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity07">
+
+    <Button
+        android:id="@+id/btn_qq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="qq" />
+
+    <Button
+        android:id="@+id/btn_wx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_qq"
+        android:text="wx" />
+
+    <Button
+        android:id="@+id/btn_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_wx"
+        android:text="more" />
+
+    <Button
+        android:id="@+id/btn_wxFriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_more"
+        android:text="wxFriendText" />
+
+    <Button
+        android:id="@+id/btn_qqFriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_wxFriend"
+        android:text="qqFriendText" />
+
+    <Button
+        android:id="@+id/btn_wxFriend_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_more"
+        android:layout_toRightOf="@+id/btn_wxFriend"
+        android:text="wxFriendImg" />
+
+    <Button
+        android:id="@+id/btn_qqFriend_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_wxFriend"
+        android:layout_toRightOf="@+id/btn_qqFriend"
+        android:text="qqFriendImg" />
+
+    <Button
+        android:id="@+id/btn_wxFriend_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_more"
+        android:layout_toRightOf="@+id/btn_wxFriend_img"
+        android:text="wxFriendAudio" />
+
+    <Button
+        android:id="@+id/btn_qqFriend_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_wxFriend"
+        android:layout_toRightOf="@+id/btn_qqFriend_img"
+        android:text="qqFriendAudio" />
+
+    <Button
+        android:id="@+id/btn_wxFriend_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_qqFriend"
+        android:text="wxFriendVideo" />
+
+    <Button
+        android:id="@+id/btn_qqFriend_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_wxFriend_video"
+        android:text="qqFriendVideo" />
+
+
+    <Button
+        android:id="@+id/btn_wxCircle_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_wxFriend_video"
+        android:layout_toRightOf="@+id/btn_wxFriend_img"
+        android:text="wxCircleImg" />
+
+
+</RelativeLayout>
