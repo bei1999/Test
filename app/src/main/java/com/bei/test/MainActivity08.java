@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * author : lzb
  * e-mail : lizhanbei@cgtn.com
  * time   : 2017/04/21
- * desc   :
+ * desc   : test recyclerview add header
  * version: 1.0
  */
 public class MainActivity08 extends Activity {
