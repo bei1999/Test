@@ -77,25 +77,19 @@ public class MyApplication extends Application {
             registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
                 @Override
                 public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                    if (null == mActivitys) {
-                        return;
-                    }
-                    mActivitys.add(activity);
+
                 }
 
                 @Override
                 public void onActivityStarted(Activity activity) {
-                    Log.d("bei", "register-onActivityStarted");
                 }
 
                 @Override
                 public void onActivityResumed(Activity activity) {
-                    Log.d("bei", "register-onActivityResumed");
                 }
 
                 @Override
                 public void onActivityPaused(Activity activity) {
-                    Log.d("bei", "register-onActivityPaused");
                 }
 
                 @Override
@@ -108,12 +102,7 @@ public class MyApplication extends Application {
 
                 @Override
                 public void onActivityDestroyed(Activity activity) {
-                    if (null == activity && mActivitys.isEmpty()) {
-                        return;
-                    }
-                    if (mActivitys.contains(activity)) {
-                        mActivitys.remove(activity);
-                    }
+
                 }
             });
         }

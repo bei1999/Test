@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -40,6 +41,10 @@ public class ClockView extends View {
     private String mLastDigitalTimeStr;
     private long mLastTimeMillis;
     private int mTimeTextSize;
+    private RectF mClockViewRectF;
+    private float mNowClockAngle;
+    private int mClockViewCenterX;
+    private int mClockViewCenterY;
 
     public ClockView(Context context) {
         this(context, null);
@@ -59,10 +64,13 @@ public class ClockView extends View {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ClockView);
         mTimeTextSize = typedArray.getDimensionPixelSize(R.styleable.ClockView_timeTextSize,
                 UiUtils.dipToPx(context, DEFAULT_DIGITAL_TIME_TEXT_SIZE));
+        typedArray.recycle();
+
+        mClockViewRectF = new RectF();
 
         textPaint = new Paint();
         textPaint.setColor(Color.BLACK);        // 设置颜色
-        textPaint.setStyle(Paint.Style.FILL);   // 设置样式
+//        textPaint.setStyle(Paint.Style.FILL);   // 设置样式
         textPaint.setTextSize(mTimeTextSize);              // 设置字体大小
         mDigitalTimeTextRect = new Rect();
         textPaint.getTextBounds(DEFAULT_DEFAULT_DIGITAL_TIME_TEXT, 0,
@@ -74,13 +82,21 @@ public class ClockView extends View {
         mLastDigitalTimeStr = String.format("%02d:%02d", mCalendar.get(Calendar.HOUR),
                 mCalendar.get(Calendar.MINUTE));
 
+
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mWidth = w;
-        mHeight = h;
+//        mWidth = w;
+//        mHeight = h;
+        int len = w > h ? h : w;
+        mClockViewRectF.set(0, 0, len, len);
+        mClockViewRectF.offset((w - len) / 2, (h - len) / 2);
+        mClockViewCenterX = (int) mClockViewRectF.centerX();
+        mClockViewCenterY = (int) mClockViewRectF.centerY();
+
+//        mClockViewRectF.set(0, mWidth /2, mWidth /2, 0);
 
     }
 
@@ -105,6 +121,7 @@ public class ClockView extends View {
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
+                mNowClockAngle = (float) animation.getAnimatedValue() ;
                 invalidate();
             }
         });
@@ -114,8 +131,29 @@ public class ClockView extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+//        if (widthSpecMode != MeasureSpec.EXACTLY) {
+//            widthMeasureSpec = MeasureSpec.makeMeasureSpec(mClockMaskBitmap.getWidth(), MeasureSpec.EXACTLY);
+//        }
+//        if (heightSpecMode != MeasureSpec.EXACTLY) {
+//            heightMeasureSpec = MeasureSpec.makeMeasureSpec(mClockMaskBitmap.getHeight(), MeasureSpec.EXACTLY);
+//        }
+        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        textPaint.setColor(Color.BLACK);
+        canvas.drawRect(mClockViewRectF,textPaint);
+
+//        canvas.drawRect(mWidth / 2,mHeight /3 ,mWidth / 3 * 2 , mHeight / 3 * 2,textPaint);
+//        canvas.rotate(mNowClockAngle,mWidth / 2,mHeight / 2);
+        textPaint.setColor(Color.RED);
+        canvas.drawCircle(mClockViewCenterX ,mClockViewCenterX,60,textPaint);
         updateTimeText(canvas);
     }
 
