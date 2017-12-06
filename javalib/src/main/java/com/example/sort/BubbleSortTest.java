@@ -8,9 +8,9 @@ import java.util.Arrays;
 
 public class BubbleSortTest {
     public static void main(String[] args) {
-        int[] data = new int[]{1, 4, 2, 6, 9, 3, 7};
-        bubbleSort01(data);
-        bubbleSort02(data);
+        int[] data = new int[]{1, 4, 2, 2,2,2,2,2,2,2,26, 9, 3, 7};
+//        bubbleSort01(data);
+//        bubbleSort02(data);
 
     }
 

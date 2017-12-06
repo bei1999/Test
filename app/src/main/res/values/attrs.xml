@@ -212,5 +212,14 @@
         <attr name="pstsTabTextAlpha" format="integer" />
         <attr name="pstsTabTextFontFamily" format="string" />
     </declare-styleable>
+    <declare-styleable name="ClockView">
+        <attr name="pointRadius" format="dimension" />
+        <attr name="pointColor" format="color" />
+        <attr name="timeTextSize" format="dimension" />
+        <attr name="timeTextColor" format="color" />
+        <attr name="timeScaleWidth" format="dimension" />
+        <attr name="timeScaleHeight" format="dimension" />
+        <attr name="timeScaleColor" format="color" />
+    </declare-styleable>
 
 </resources>
