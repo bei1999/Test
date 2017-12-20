@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.bei.test.utils.AppUtils;
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.orhanobut.logger.Logger;
 
 import java.util.Collections;
@@ -15,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import okhttp3.OkHttpClient;
 
 /**
  * Created by lzb on 16/12/9.
@@ -48,6 +51,11 @@ public class MyApplication extends Application {
         }
         /**注册全局activity 监听*/
         registerActivityListener();
+
+        Stetho.initializeWithDefaults(this);
+        new OkHttpClient.Builder()
+                .addNetworkInterceptor(new StethoInterceptor())
+                .build();
 
 
     }
