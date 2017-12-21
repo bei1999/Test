@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity09">
+        <activity android:name=".ContentResolverDemoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <provider
-            android:authorities=".DataProvider"
+            android:authorities="com.bei.test.db.DataProvider"
             android:name=".db.DataProvider"/>
 
         <meta-data
